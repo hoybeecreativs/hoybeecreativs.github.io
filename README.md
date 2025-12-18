@@ -90,7 +90,7 @@ For full details, please read our [Privacy Policy](https://youtubestudioassistan
 
 ## 🤝 Support & Community
 
-- **Found a bug?** [Open an issue](https://github.com/hoybeecreativs/hoybeecreativs.github.io/issues) on our GitHub repository.
+- **Found a bug?** [Open an issue](https://github.com/hoybeecreativs/youtube-studio-assistant/issues) on our GitHub repository.
 - **Have a question?** Email us at `hoybeecreativsdigital@gmail.com`.
 
 ## 📄 Legal
