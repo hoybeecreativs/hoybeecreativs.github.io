@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://bandioke.github.io/youtube-studio-assistant/">🌐 Website</a> •
+  <a href="https://youtubestudioassistant.website">🌐 Website</a> •
   <a href="#features">✨ Features</a> •
   <a href="#installation">📦 Installation</a> •
   <a href="#screenshots">📸 Screenshots</a>
