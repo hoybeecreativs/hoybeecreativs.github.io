@@ -1,0 +1,83 @@
+backend:
+  name: github
+  repo: hoybeecreativs/youtube-studio-assistant
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+# Optional: Use this for local development
+# local_backend: true
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "Home Page"
+        name: "home"
+        file: "content/home.md"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Hero Heading", name: "hero_heading", widget: "string"}
+          - {label: "Hero Description", name: "hero_description", widget: "text"}
+          - {label: "CTA Button Text", name: "cta_text", widget: "string"}
+          - {label: "CTA Button Link", name: "cta_link", widget: "string"}
+          
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "Navigation"
+        name: "navigation"
+        file: "content/navigation.yml"
+        fields:
+          - label: "Menu Items"
+            name: "menu_items"
+            widget: "list"
+            fields:
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "Link", name: "link", widget: "string"}
+              
+      - label: "General Settings"
+        name: "general"
+        file: "content/settings.yml"
+        fields:
+          - {label: "Site Title", name: "site_title", widget: "string"}
+          - {label: "Site Description", name: "site_description", widget: "text"}
+          - {label: "Logo", name: "logo", widget: "image"}
+          
+  - name: "features"
+    label: "Features"
+    folder: "content/features"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Icon", name: "icon", widget: "image", required: false}
+      - {label: "Order", name: "order", widget: "number", default: 1}
+      
+  - name: "pricing"
+    label: "Pricing Plans"
+    folder: "content/pricing"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Plan Name", name: "name", widget: "string"}
+      - {label: "Price", name: "price", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Features", name: "features", widget: "list", field: {label: "Feature", name: "feature", widget: "string"}}
+      - {label: "CTA Text", name: "cta_text", widget: "string"}
+      - {label: "CTA Link", name: "cta_link", widget: "string"}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      
+  - name: "faq"
+    label: "FAQ"
+    folder: "content/faq"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Question", name: "question", widget: "string"}
+      - {label: "Answer", name: "answer", widget: "text"}
+      - {label: "Order", name: "order", widget: "number", default: 1}

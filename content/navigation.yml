@@ -1,0 +1,9 @@
+menu_items:
+  - label: "Features"
+    link: "#features"
+  - label: "How it Works"
+    link: "#how-it-works"
+  - label: "Pricing"
+    link: "#pricing"
+  - label: "FAQ"
+    link: "#faq"
