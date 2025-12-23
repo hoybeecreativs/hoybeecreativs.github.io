@@ -161,6 +161,86 @@ Error generating stack: `+l.message+`
         addFooterLinks();
       }
     </script>
+    
+    <!-- Custom script to add hero banner image -->
+    <script>
+      function addHeroBanner() {
+        // Find the hero section (usually has large heading)
+        const heroHeading = Array.from(document.querySelectorAll('h1, h2')).find(h => 
+          h.textContent.includes('Supercharge') || h.textContent.includes('YouTube')
+        );
+        
+        if (heroHeading && !document.querySelector('.custom-hero-banner')) {
+          // Find the hero section container
+          let heroSection = heroHeading;
+          while (heroSection && heroSection.tagName !== 'SECTION' && heroSection.parentElement) {
+            heroSection = heroSection.parentElement;
+            // Stop at a reasonable container level
+            if (heroSection.classList.contains('container') || 
+                heroSection.style.maxWidth || 
+                heroSection.offsetWidth > window.innerWidth * 0.8) {
+              break;
+            }
+          }
+          
+          if (heroSection) {
+            // Create banner container
+            const bannerContainer = document.createElement('div');
+            bannerContainer.className = 'custom-hero-banner';
+            bannerContainer.style.cssText = `
+              width: 100%;
+              max-width: 1200px;
+              margin: 2rem auto;
+              padding: 0 1rem;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            `;
+            
+            // Create image element
+            const bannerImg = document.createElement('img');
+            bannerImg.src = '/images/hero-banner.jpg';
+            bannerImg.alt = 'YouTube Studio Assistant - The Ultimate Tool for Creators';
+            bannerImg.style.cssText = `
+              width: 100%;
+              height: auto;
+              border-radius: 16px;
+              box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+              transition: transform 0.3s ease;
+            `;
+            
+            // Add hover effect
+            bannerImg.addEventListener('mouseenter', () => {
+              bannerImg.style.transform = 'scale(1.02)';
+            });
+            bannerImg.addEventListener('mouseleave', () => {
+              bannerImg.style.transform = 'scale(1)';
+            });
+            
+            bannerContainer.appendChild(bannerImg);
+            
+            // Insert banner after hero heading
+            if (heroHeading.nextSibling) {
+              heroHeading.parentNode.insertBefore(bannerContainer, heroHeading.nextSibling);
+            } else {
+              heroHeading.parentNode.appendChild(bannerContainer);
+            }
+            
+            console.log('Hero banner added successfully');
+          }
+        } else if (!heroHeading) {
+          // Retry after a short delay if React hasn't finished rendering
+          setTimeout(addHeroBanner, 100);
+        }
+      }
+      
+      // Start trying to add banner after page load
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', addHeroBanner);
+      } else {
+        addHeroBanner();
+      }
+    </script>
   </body>
 
 </html>
