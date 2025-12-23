@@ -131,38 +131,36 @@ Error generating stack: `+l.message+`
         const featuresLink = footerLinks.find(a => a.textContent.trim() === 'Features');
         
         if (featuresLink && !document.querySelector('a[href="/about.html"]')) {
-          // Get computed styles from Features link
-          const computedStyle = window.getComputedStyle(featuresLink);
+          // Get the parent li element
+          const featuresLi = featuresLink.parentElement;
+          const parentUl = featuresLi.parentElement;
           
-          // Create About link
+          // Create About li and link
+          const aboutLi = document.createElement('li');
+          aboutLi.className = featuresLi.className;
           const aboutLink = document.createElement('a');
           aboutLink.href = '/about.html';
           aboutLink.textContent = 'About';
           aboutLink.className = featuresLink.className;
-          // Copy all relevant styles
-          aboutLink.style.display = computedStyle.display;
-          aboutLink.style.marginTop = computedStyle.marginTop;
-          aboutLink.style.marginBottom = computedStyle.marginBottom;
-          aboutLink.style.marginLeft = computedStyle.marginLeft;
-          aboutLink.style.marginRight = computedStyle.marginRight;
-          aboutLink.style.padding = computedStyle.padding;
+          aboutLi.appendChild(aboutLink);
           
-          // Create Team link
+          // Create Team li and link
+          const teamLi = document.createElement('li');
+          teamLi.className = featuresLi.className;
           const teamLink = document.createElement('a');
           teamLink.href = '/team.html';
           teamLink.textContent = 'Team';
           teamLink.className = featuresLink.className;
-          // Copy all relevant styles
-          teamLink.style.display = computedStyle.display;
-          teamLink.style.marginTop = computedStyle.marginTop;
-          teamLink.style.marginBottom = computedStyle.marginBottom;
-          teamLink.style.marginLeft = computedStyle.marginLeft;
-          teamLink.style.marginRight = computedStyle.marginRight;
-          teamLink.style.padding = computedStyle.padding;
+          teamLi.appendChild(teamLink);
           
-          // Insert after Features link
-          featuresLink.parentNode.insertBefore(aboutLink, featuresLink.nextSibling);
-          aboutLink.parentNode.insertBefore(teamLink, aboutLink.nextSibling);
+          // Insert after Features li
+          if (featuresLi.nextSibling) {
+            parentUl.insertBefore(aboutLi, featuresLi.nextSibling);
+            parentUl.insertBefore(teamLi, aboutLi.nextSibling);
+          } else {
+            parentUl.appendChild(aboutLi);
+            parentUl.appendChild(teamLi);
+          }
           
           console.log('About and Team links added to footer');
         } else {
